@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Banco-DaFrHe</string>
+    <string name="IniciarSesion">Log In</string>
+    <string name="obligatorio">Obligatory</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="Bienvenida">"Welcome"</string>
+    <string name="posicionGlobal">Global Position</string>
+    <string name="movimientos">Movements</string>
+    <string name="transferencias">Transferences</string>
+    <string name="cambiarContra">Change Password</string>
+    <string name="promociones">Promotions</string>
+    <string name="cajeros">ATM</string>
+    <string name="exit">Exit</string>
+    <string name="entrar">Go in</string>
+    <string name="edLogIn">Enter your Username</string>
+    <string name="edPsswd">Enter your Password</string>
+    <string name="errorLI">Username field is obligatory</string>
+    <string name="errorPS">Password field is obligatory</string>
+    <string name="edCA">Enter your actual password</string>
+    <string name="edCN">Enter your new password</string>
+    <string name="edCC">Confirm your new password</string>
+    <string name="errorAC">Actual password is obligatory</string>
+    <string name="errorCN">New password is obligatory</string>
+    <string name="errorCC">Confirm password is obligatory</string>
+</resources>

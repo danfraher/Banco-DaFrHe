@@ -2,12 +2,14 @@ package com.example.banco_dafrhe
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.banco_dafrhe.databinding.ActivityLoginBinding
-import com.example.banco_dafrhe.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,20 +20,62 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Función botón Inicio
 
-        binding.inicioSesion.setOnClickListener{
+        binding.inicioSesion.setOnClickListener {
+
             if (binding.textUsuario.text.toString().isNotEmpty() && binding.textContraseA.text.toString().isNotEmpty()) {
 
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("Usuario", binding.textUsuario.text.toString())
                 startActivity(intent)
 
-            } else {
-
-                binding.errorText.text = "Por favor introduce Usuario y Contraseña"
-
             }
         }
+
+        //Función comprobación
+
+        binding.textUsuario.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+
+            if (!hasFocus) {
+
+                val userInput = binding.textUsuario.text.toString().trim()
+
+                if (userInput.isEmpty()) {
+
+                    binding.layoutUsuario.error = getString(R.string.errorLI)
+
+                } else {
+
+                    binding.layoutUsuario.error = null
+
+                }
+
+            }
+
+        }
+
+        binding.textContraseA.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+
+            if (!hasFocus) {
+
+               val userInput = binding.textContraseA.text.toString().trim()
+
+               if (userInput.isEmpty()) {
+
+                   binding.layoutContraseA.error = getString(R.string.errorPS)
+
+               } else {
+
+                   binding.layoutContraseA.error = null
+
+               }
+
+            }
+
+        }
+
+        //Función botón salir
 
         binding.salir.setOnClickListener{
 

@@ -6,44 +6,32 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.banco_dafrhe.databinding.ActivityMainBinding
+import com.example.banco_dafrhe.databinding.ActivityWelcomeBinding
 
-class MainActivity : AppCompatActivity() {
+class WelcomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val usuarioRecibido = intent.getStringExtra("Usuario")
+        binding.entrarBT.setOnClickListener {
 
-        binding.textoBienvenida.text = "${getString(R.string.Bienvenida)} \n \n $usuarioRecibido"
-
-        binding.btExit.setOnClickListener {
-
-            val int = Intent(this, LoginActivity::class.java)
-            startActivity(int)
+            val init = Intent(this, LoginActivity::class.java)
+            startActivity(init)
             finish()
-
-        }
-
-        binding.btCambiarPss.setOnClickListener {
-
-            val int2 = Intent(this, PasswordChange::class.java)
-            startActivity(int2)
 
         }
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        setContentView(R.layout.activity_welcome)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
     }
-
 }

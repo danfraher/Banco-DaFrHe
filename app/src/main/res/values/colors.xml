@@ -5,4 +5,8 @@
     <color name="grisito">#D4C4C1</color>
     <color name="lavanda">#9F6EAC</color>
     <color name="red">#FF0000</color>
+    <color name="verde">#3DDC84</color>
+    <color name="grisitoOscuro">#332F2C</color>
+    <color name="grisito2">#515151</color>
+    <color name="amarilloPastel">#f5eef8</color>
 </resources>

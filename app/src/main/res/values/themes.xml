@@ -5,5 +5,13 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="MiTema" parent="Base.Theme.BancoDaFrHe">
+
+        <item name="android:backgroundTint">@color/grisito2</item>
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
     <style name="Theme.BancoDaFrHe" parent="Base.Theme.BancoDaFrHe" />
+
 </resources>
