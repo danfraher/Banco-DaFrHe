@@ -1,5 +1,6 @@
 package com.example.banco_dafrhe
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,19 @@ class PasswordChange : AppCompatActivity() {
 
         binding = ActivityPasswordChangeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Botón cancelar (lleva a la pantalla principal)
+
+        binding.btCancelar.setOnClickListener {
+
+            val int = Intent(this, MainActivity::class.java)
+            startActivity(int)
+            finish()
+
+        }
+
+        //Funcion comprobación
+        //Si algún campo está vacío, muestra un snackbar con un mensaje de error
 
         binding.textAC.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
 
@@ -79,7 +93,6 @@ class PasswordChange : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_password_change)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

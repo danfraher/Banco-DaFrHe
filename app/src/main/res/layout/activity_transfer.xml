@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TransferActivity">
+
+    <!-- Lineas Guia -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/GLV"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/GLH"/>
+
+    <!-- Título -->
+
+    <TextView
+        android:id="@+id/textTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/transferencias"
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        style="@style/Estilo.backgroundGris"/>
+
+    <!-- Spinner Cuenta Origen -->
+
+    <TextView
+        android:id="@+id/textEA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textTransfer"
+        android:text="@string/elegirAcc"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerAcc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textEA"
+        android:layout_marginTop="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.Spinner" />
+
+    <!-- Radio Buttons Cuenta Destino -->
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/spinnerAcc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/GLV">
+
+        <RadioButton
+            android:id="@+id/radioBCP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cuentaPropia"
+            android:layout_marginEnd="32dp"
+            style="@style/Estilo.textoBlanco"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radoBCA"
+            style="@style/Estilo.textoBlanco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cuentaAjena"
+            android:layout_marginStart="32dp"
+            android:checked="false"/>
+
+    </RadioGroup>
+
+    <!-- Spinner y EditText Cuenta Destino -->
+
+    <Spinner
+        android:id="@+id/spinnerCP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.Spinner"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edCA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:hint="@string/numeroCuenta"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.TextInputLayout"/>
+
+    <!-- Cantidad, textView, EditText y Spinner -->
+
+    <LinearLayout
+        android:id="@+id/llCant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/GLH"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvCant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cantidad"
+            android:layout_marginStart="16dp"/>
+
+        <EditText
+            android:id="@+id/edCant"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="@string/introCantidad"
+            style="@style/Estilo.TextInputLayout"/>
+
+        <Spinner
+            android:id="@+id/spinnerDivisa"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/Estilo.Spinner"/>
+
+    </LinearLayout>
+
+    <!-- CheckBox Justificante -->
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cbJustificante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/checkboxJustificante"
+        app:layout_constraintTop_toBottomOf="@id/llCant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.textoBlanco"/>
+
+    <!-- Botones Enviar y Cancelar -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEnviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/enviar"
+        app:layout_constraintTop_toBottomOf="@id/cbJustificante"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/GLV"
+        style="@style/Estilo.Button.main"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/cancelar"
+        app:layout_constraintTop_toBottomOf="@id/cbJustificante"
+        app:layout_constraintStart_toEndOf="@id/GLV"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.Button.main"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,22 +17,41 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Recibe el usuario de la pantalla de login
+
         val usuarioRecibido = intent.getStringExtra("Usuario")
 
+        //Muestra el usuario en la pantalla principal
+
         binding.textoBienvenida.text = "${getString(R.string.Bienvenida)} \n \n $usuarioRecibido"
+
+        //Botones de la pantalla principal
+
+        //Botón Transferencias (lleva a la pantalla transferencias)
+
+        binding.btTransfer.setOnClickListener {
+
+            val int = Intent(this, TransferActivity::class.java)
+            startActivity(int)
+
+        }
+
+        //Botón Cambiar Contraseña (lleva a la pantalla de cambiar contraseña)
+
+        binding.btCambiarPss.setOnClickListener {
+
+            val int = Intent(this, PasswordChange::class.java)
+            startActivity(int)
+
+        }
+
+        //Botón Salir (lleva a la pantalla de login)
 
         binding.btExit.setOnClickListener {
 
             val int = Intent(this, LoginActivity::class.java)
             startActivity(int)
             finish()
-
-        }
-
-        binding.btCambiarPss.setOnClickListener {
-
-            val int2 = Intent(this, PasswordChange::class.java)
-            startActivity(int2)
 
         }
 

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity">
 
+    <!-- Lineas Guía -->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glH"
@@ -15,6 +16,7 @@
         app:layout_constraintGuide_percent="0.3"
         android:orientation="horizontal"/>
 
+    <!-- Titulo -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +29,10 @@
         app:layout_constraintBottom_toTopOf="@id/glH"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Boton -->
+
     <com.google.android.material.button.MaterialButton
+        style="@style/Estilo.grisito2"
         android:id="@+id/entrarBT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

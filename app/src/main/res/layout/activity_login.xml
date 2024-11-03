@@ -32,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/IniciarSesion"
-        android:textColor="@color/black"
         android:layout_marginTop="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -57,6 +56,7 @@
         app:layout_constraintBottom_toTopOf="@id/guidelineH"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        style="@style/Estilo.TextInputLayout"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="9"
-            />
+            style="@style/Estilo.TextInputLayout"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,6 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:endIconMode="password_toggle"
+        style="@style/Estilo.TextInputLayout"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            style="@style/Estilo.TextInputLayout"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +107,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineV"
         app:layout_constraintTop_toBottomOf="@id/layoutContraseA"
-        />
+        style="@style/Estilo.grisito2"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/salir"
@@ -118,6 +120,6 @@
         app:layout_constraintStart_toEndOf="@id/guidelineV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutContraseA"
-        />
+        style="@style/Estilo.grisito2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

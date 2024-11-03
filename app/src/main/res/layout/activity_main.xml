@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/white">
+    tools:context=".MainActivity">
 
     <!-- Lineas guía -->
 
@@ -38,9 +37,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guidelineMainH"
-        >
-
-    </com.google.android.material.card.MaterialCardView>
+        style="@style/Estilo.grisitoOscuro"
+        />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="0dp"
@@ -71,44 +69,6 @@
         app:layout_constraintEnd_toEndOf="@id/materialCard"
         app:layout_constraintBottom_toBottomOf="@id/materialCard"/>
 
-    <!-- Pie de app -->
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/verde"
-            app:fabAlignmentMode="center"
-            app:fabAnchorMode="cradle"
-            app:fabCradleMargin="10dp"
-            app:fabCradleRoundedCornerRadius="16dp"
-            app:fabCradleVerticalOffset="10dp"
-            app:hideOnScroll="true"
-            app:navigationIcon="@drawable/hamburguesa2"
-            app:navigationIconTint="@color/black" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="anadir"
-            android:src="@drawable/banco"
-            app:borderWidth="0dp"
-            app:layout_anchor="@+id/bottomAppBar"
-            app:layout_anchorGravity="center"
-            android:layout_marginTop="8dp"/>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
     <!-- Cuerpo -->
 
     <androidx.cardview.widget.CardView
@@ -120,7 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineMainH"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        style="@style/Estilo.grisitoOscuro">
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -136,74 +97,99 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/posicionGlobal"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
                 android:drawableLeft="@drawable/psi"
-                />
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btMovimientos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/movimientos"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/mvi"/>
+                android:drawableLeft="@drawable/mvi"
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btTransfer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/transferencias"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/tri"/>
+                android:drawableLeft="@drawable/tri"
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btCambiarPss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cambiarContra"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/caconi"/>
+                android:drawableLeft="@drawable/caconi"
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btPromo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/promociones"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/promoi"/>
+                android:drawableLeft="@drawable/promoi"
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btCajero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/cajeros"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/caji"/>
+                android:drawableLeft="@drawable/caji"
+                style="@style/Estilo.Button.main"/>
 
             <Button
                 android:id="@+id/btExit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/exit"
-                android:backgroundTint="@color/verde"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:drawableLeft="@drawable/exi"/>
+                android:drawableLeft="@drawable/exi"
+                style="@style/Estilo.Button.main"/>
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <!-- Pie de app -->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabAlignmentMode="center"
+            app:fabAnchorMode="cradle"
+            app:fabCradleMargin="10dp"
+            app:fabCradleRoundedCornerRadius="16dp"
+            app:fabCradleVerticalOffset="10dp"
+            app:hideOnScroll="true"
+            app:navigationIcon="@drawable/hamburguesa2"
+            android:layout_gravity="bottom"
+            style="@style/Estilo.Appbar"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="añadir"
+            android:src="@drawable/banco"
+            app:borderWidth="0dp"
+            app:layout_anchor="@+id/bottomAppBar"
+            app:layout_anchorGravity="top|center"
+            style="@style/Estilo.fab"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

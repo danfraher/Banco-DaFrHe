@@ -8,6 +8,8 @@
     tools:context=".MainActivity"
     android:background="@color/white">
 
+    <!-- Lineas Guia -->
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineMainH"
         android:layout_width="wrap_content"
@@ -22,6 +24,8 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3" />
 
+    <!-- Cabecera -->
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCard"
         android:layout_width="match_parent"
@@ -33,7 +37,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guidelineMainH"/>
+        app:layout_constraintBottom_toTopOf="@id/guidelineMainH"
+        style="@style/Estilo.grisitoOscuro"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="0dp"
@@ -65,6 +70,8 @@
         app:layout_constraintEnd_toEndOf="@id/materialCard"
         app:layout_constraintBottom_toBottomOf="@id/materialCard"/>
 
+    <!-- Cuerpo -->
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -93,21 +100,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/posicionGlobal"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
                         android:drawableLeft="@drawable/psi"
-                        />
+                        style="@style/Estilo.Button.main"/>
 
                     <Button
                         android:id="@+id/btMovimientos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/movimientos"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/mvi"/>
+                        android:drawableLeft="@drawable/mvi"
+                        style="@style/Estilo.Button.main"/>
 
                 </TableRow>
 
@@ -120,20 +122,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/transferencias"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/tri"/>
+                        android:drawableLeft="@drawable/tri"
+                        style="@style/Estilo.Button.main"/>
 
                     <Button
                         android:id="@+id/btCambiarPss"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/cambiarContra"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/caconi"/>
+                        android:drawableLeft="@drawable/caconi"
+                        style="@style/Estilo.Button.main"/>
 
                 </TableRow>
 
@@ -146,20 +144,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/promociones"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/promoi"/>
+                        android:drawableLeft="@drawable/promoi"
+                        style="@style/Estilo.Button.main"/>
 
                     <Button
                         android:id="@+id/btCajero"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/cajeros"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/caji"/>
+                        android:drawableLeft="@drawable/caji"
+                        style="@style/Estilo.Button.main"/>
 
                 </TableRow>
 
@@ -173,10 +167,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/exit"
-                        android:backgroundTint="@color/verde"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:drawableLeft="@drawable/exi"/>
+                        android:drawableLeft="@drawable/exi"
+                        style="@style/Estilo.Button.main"/>
 
                 </TableRow>
 
@@ -197,7 +189,6 @@
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/verde"
             app:fabAlignmentMode="center"
             app:fabAnchorMode="cradle"
             app:fabCradleMargin="10dp"
@@ -205,7 +196,7 @@
             app:fabCradleVerticalOffset="10dp"
             app:hideOnScroll="true"
             app:navigationIcon="@drawable/hamburguesa2"
-            app:navigationIconTint="@color/black" />
+            style="@style/Estilo.Appbar"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -216,7 +207,8 @@
             app:borderWidth="0dp"
             app:layout_anchor="@+id/bottomAppBar"
             app:layout_anchorGravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            style="@style/Estilo.fab"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

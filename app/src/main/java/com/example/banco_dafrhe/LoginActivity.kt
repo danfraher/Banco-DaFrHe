@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Función botón Inicio
+        //Si el usuario y la contraseña no están vacíos, pasa a la pantalla principal
 
         binding.inicioSesion.setOnClickListener {
 
@@ -31,9 +32,11 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
 
             }
+
         }
 
         //Función comprobación
+        //Si el usuario o la contraseña están vacíos, muestra un snackbar con un mensaje de error
 
         binding.textUsuario.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
 
@@ -76,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //Función botón salir
+        //Finaliza la aplicación
 
         binding.salir.setOnClickListener{
 
