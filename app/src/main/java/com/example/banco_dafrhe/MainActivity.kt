@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         //Recibe el usuario de la pantalla de login
 
-        val usuarioRecibido = intent.getStringExtra("Usuario")
+        val usuarioRecibido = intent.getSerializableExtra("Cliente")
 
         //Muestra el usuario en la pantalla principal
 
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         binding.btTransfer.setOnClickListener {
 
             val int = Intent(this, TransferActivity::class.java)
+            int.putExtra("Cliente", usuarioRecibido.toString())
+            startActivity(int)
             startActivity(int)
 
         }
@@ -41,7 +43,9 @@ class MainActivity : AppCompatActivity() {
         binding.btCambiarPss.setOnClickListener {
 
             val int = Intent(this, PasswordChange::class.java)
+            int.putExtra("Cliente", usuarioRecibido.toString())
             startActivity(int)
+            finish()
 
         }
 
@@ -50,6 +54,24 @@ class MainActivity : AppCompatActivity() {
         binding.btExit.setOnClickListener {
 
             val int = Intent(this, LoginActivity::class.java)
+            startActivity(int)
+            finish()
+
+        }
+
+        binding.btGlobal.setOnClickListener {
+
+            val int = Intent(this, PosicionGlobal::class.java)
+            int.putExtra("Cliente", usuarioRecibido.toString())
+            startActivity(int)
+            finish()
+
+        }
+
+        binding.btMovimientos.setOnClickListener {
+
+            val int = Intent(this, Movimientos::class.java)
+            int.putExtra("Cliente", usuarioRecibido.toString())
             startActivity(int)
             finish()
 

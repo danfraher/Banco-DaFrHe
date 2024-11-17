@@ -13,6 +13,12 @@
         android:theme="@style/Theme.BancoDaFrHe"
         tools:targetApi="31">
         <activity
+            android:name=".Movimientos"
+            android:exported="false" />
+        <activity
+            android:name=".PosicionGlobal"
+            android:exported="false" />
+        <activity
             android:name=".TransferActivity"
             android:exported="false" />
         <activity

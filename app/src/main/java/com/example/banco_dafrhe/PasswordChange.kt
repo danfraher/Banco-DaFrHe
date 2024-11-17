@@ -3,11 +3,15 @@ package com.example.banco_dafrhe
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.bd.MiBancoOperacional
+import com.example.banco_dafrhe.databinding.ActivityLoginBinding
 import com.example.banco_dafrhe.databinding.ActivityPasswordChangeBinding
+import com.example.banco_dafrhe.pojo.Cliente
 
 class PasswordChange : AppCompatActivity() {
 
@@ -19,10 +23,42 @@ class PasswordChange : AppCompatActivity() {
         setContentView(binding.root)
 
         //Botón cancelar (lleva a la pantalla principal)
+        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
+        val usuarioRecibido = intent.getSerializableExtra("Cliente")
+
+        binding.btCP.setOnClickListener {
+
+            var cliente = Cliente()
+            cliente?.setNif(usuarioRecibido.toString())
+            cliente?.setClaveSeguridad(binding.textAC.text.toString())
+            val clienteLogeado = mbo?.login(cliente) ?: -1
+            if(clienteLogeado == -1) {
+                Toast.makeText(this, "Contraseña actual incorrecta", Toast.LENGTH_SHORT).show()
+            }else{
+
+                if (binding.textCN.text.toString() == binding.textCC.text.toString()) {
+
+                    cliente.setClaveSeguridad(binding.textCN.text.toString())
+                    mbo?.changePassword(cliente)
+                    Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show()
+                    val int = Intent(this, LoginActivity::class.java)
+                    startActivity(int)
+                    finish()
+
+                } else{
+
+                    Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+
+        }
 
         binding.btCancelar.setOnClickListener {
 
             val int = Intent(this, MainActivity::class.java)
+            int.putExtra("Cliente", usuarioRecibido.toString())
             startActivity(int)
             finish()
 

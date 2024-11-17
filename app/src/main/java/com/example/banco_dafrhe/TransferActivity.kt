@@ -2,6 +2,7 @@ package com.example.banco_dafrhe
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -13,12 +14,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.banco_dafrhe.databinding.ActivityTransferBinding
 import com.example.banco_dafrhe.databinding.ToastPersonalizadoBinding
+import com.example.banco_dafrhe.bd.MiBancoOperacional
+import com.example.banco_dafrhe.pojo.Cliente
+import com.example.banco_dafrhe.pojo.Cuenta
 
 class TransferActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTransferBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
 
         binding = ActivityTransferBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,6 +41,7 @@ class TransferActivity : AppCompatActivity() {
 
             when (checkedId) {
                 binding.radioBCP.id -> {
+
                     binding.spinnerCP.visibility = View.VISIBLE
                     binding.edCA.visibility = View.GONE
                     binding.edCA.text?.clear()
@@ -53,7 +60,14 @@ class TransferActivity : AppCompatActivity() {
 
         //Adaptador para los spinners
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cuentasBancarias)
+        var cliente: Cliente = Cliente()
+        cliente.setNif(intent.getSerializableExtra("Cliente").toString())
+
+        val listaCuentas: ArrayList<Cuenta>? = mbo?.getCuentas(cliente) as ArrayList<Cuenta>?
+
+        Log.e("LISTACUENTAS", listaCuentas?.size.toString())
+
+        val adapter = ArrayAdapter(binding.root.context, android.R.layout.simple_spinner_item, listOf(listaCuentas))
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
