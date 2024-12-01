@@ -1,4 +1,4 @@
-package com.example.banco_dafrhe
+package com.example.banco_dafrhe.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.bd.MiBancoOperacional
-import com.example.banco_dafrhe.databinding.ActivityLoginBinding
 import com.example.banco_dafrhe.databinding.ActivityPasswordChangeBinding
 import com.example.banco_dafrhe.pojo.Cliente
 
@@ -24,32 +24,49 @@ class PasswordChange : AppCompatActivity() {
 
         //Botón cancelar (lleva a la pantalla principal)
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
-        val usuarioRecibido = intent.getSerializableExtra("Cliente")
+        val usuarioRecibido = intent.getSerializableExtra("Cliente") as? Cliente
+
+        if (usuarioRecibido == null || usuarioRecibido.getId() == 0) {
+
+            Toast.makeText(this, "Error al recuperar el cliente", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+
+        }
 
         binding.btCP.setOnClickListener {
 
-            var cliente = Cliente()
-            cliente?.setNif(usuarioRecibido.toString())
-            cliente?.setClaveSeguridad(binding.textAC.text.toString())
-            val clienteLogeado = mbo?.login(cliente) ?: -1
-            if(clienteLogeado == -1) {
-                Toast.makeText(this, "Contraseña actual incorrecta", Toast.LENGTH_SHORT).show()
-            }else{
+            val contraActual = binding.textAC.text.toString()
+            if (contraActual != usuarioRecibido.getClaveSeguridad()) {
 
-                if (binding.textCN.text.toString() == binding.textCC.text.toString()) {
+                Toast.makeText(this, "Contraseña actual incorrecta", Toast.LENGTH_SHORT).show();
+                return@setOnClickListener
 
-                    cliente.setClaveSeguridad(binding.textCN.text.toString())
-                    mbo?.changePassword(cliente)
-                    Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show()
-                    val int = Intent(this, LoginActivity::class.java)
-                    startActivity(int)
-                    finish()
+            }
 
-                } else{
+            val contraNueva = binding.textCN.text.toString()
+            val confirmContraNueva = binding.textCC.text.toString()
 
-                    Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            if (contraNueva != confirmContraNueva) {
 
-                }
+                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                return@setOnClickListener
+
+            }
+
+            usuarioRecibido.setClaveSeguridad(contraNueva)
+            val actualizado = mbo?.changePassword(usuarioRecibido)
+
+            if (actualizado == 1) {
+
+                Toast.makeText(this, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show();
+                val int = Intent(this, LoginActivity::class.java)
+                startActivity(int)
+                finish()
+
+            } else {
+
+                Toast.makeText(this, "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -57,9 +74,6 @@ class PasswordChange : AppCompatActivity() {
 
         binding.btCancelar.setOnClickListener {
 
-            val int = Intent(this, MainActivity::class.java)
-            int.putExtra("Cliente", usuarioRecibido.toString())
-            startActivity(int)
             finish()
 
         }

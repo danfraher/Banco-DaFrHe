@@ -1,4 +1,4 @@
-package com.example.banco_dafrhe
+package com.example.banco_dafrhe.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity() {

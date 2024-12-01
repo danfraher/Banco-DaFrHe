@@ -35,6 +35,9 @@
     <string name="introCantidad">Introduce cantidad\n\n</string>
     <string name="checkboxJustificante">Añadir Justificante</string>
     <string name="enviar">Enviar</string>
+    <string name="Descripcion">Foto de perfil</string>
+    <string name="sleccion">Selecciona una cuenta:</string>
+    <string name="ultimosMovimientos">"Ultimos movimientos: "</string>
     <string-array name="cuentasBancarias">
         <item>ES66-0019-0020-96-1234567890</item>
         <item>ES91-2100-0418-45-0200051332</item>
@@ -47,4 +50,6 @@
         <item>£</item>
         <item>¥</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

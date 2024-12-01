@@ -1,17 +1,15 @@
-package com.example.banco_dafrhe
+package com.example.banco_dafrhe.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.databinding.ActivityTransferBinding
 import com.example.banco_dafrhe.databinding.ToastPersonalizadoBinding
 import com.example.banco_dafrhe.bd.MiBancoOperacional
@@ -24,15 +22,27 @@ class TransferActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         binding = ActivityTransferBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Inicializar MiBancoOperacional
+        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
+
         //Declarar variables para los arrays de strings de spinner
 
-        val cuentasBancarias = resources.getStringArray(R.array.cuentasBancarias)
-        val divisas = resources.getStringArray(R.array.divisa)
+        val cliente = intent.getSerializableExtra("Cliente") as? Cliente;
+
+        if (cliente == null || cliente.getId() == 0){
+            Log.e("TransferActivity", "Error: El cliente no llegó correctamente a TransferActivity.")
+            Toast.makeText(this, "Error al recibir el cliente", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+
 
         //Listener para el radio button
         //Si está seleccionado 1 muestra el spinner y oculta el editText si no muestra el editText y oculta el spinner
@@ -58,34 +68,39 @@ class TransferActivity : AppCompatActivity() {
 
         }
 
-        //Adaptador para los spinners
+        //Obtener las cuentas del cliente desde la base de datos
+        val listaCuentas = mbo?.getCuentas(cliente) as? List<Cuenta> ?: emptyList()
 
-        var cliente: Cliente = Cliente()
-        cliente.setNif(intent.getSerializableExtra("Cliente").toString())
+        //validar obtencion de cuentas
+        if (listaCuentas.isEmpty()) {
+            Toast.makeText(this, "No se encontraron cuentas asociadas al cliente", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
-        val listaCuentas: ArrayList<Cuenta>? = mbo?.getCuentas(cliente) as ArrayList<Cuenta>?
+        //adaptador cuentas propias
 
-        Log.e("LISTACUENTAS", listaCuentas?.size.toString())
+        val cuentasAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listaCuentas.map { cuenta -> "${ cuenta.getNumeroCuenta()}"})
+        cuentasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        val adapter = ArrayAdapter(binding.root.context, android.R.layout.simple_spinner_item, listOf(listaCuentas))
+        //asignar adaptador a spinner
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerAcc.adapter = cuentasAdapter
+        binding.spinnerCP.adapter = cuentasAdapter
 
-        //Asignar adaptadores a los spinners
+        //declarar divisas
 
-        binding.spinnerAcc.adapter = adapter
-
-        binding.spinnerCP.adapter = adapter
+        val divisas = resources.getStringArray(R.array.divisa)
 
         //Adaptador para el spinner de divisas
 
-        val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, divisas)
+        val adapterDivisas = ArrayAdapter(this, android.R.layout.simple_spinner_item, divisas)
 
         //Asignar adaptador al spinner de divisas
 
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterDivisas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.spinnerDivisa.adapter = adapter2
+        binding.spinnerDivisa.adapter = adapterDivisas
 
         //Función botón enviar
         //Recoge toda la información dada antes por los spinners, editTexts, checkbox... y la muestra en un toast personalizado
@@ -134,14 +149,9 @@ class TransferActivity : AppCompatActivity() {
 
         binding.btnCancelar.setOnClickListener{
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             finish()
 
         }
-
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

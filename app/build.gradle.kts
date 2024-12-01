@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.banco_dafrhe"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.banco_dafrhe"
@@ -50,5 +50,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.material)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 }

@@ -1,19 +1,17 @@
-package com.example.banco_dafrhe
+package com.example.banco_dafrhe.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.bd.MiBancoOperacional
 import com.example.banco_dafrhe.databinding.ActivityLoginBinding
 import com.example.banco_dafrhe.pojo.Cliente
-import com.google.android.material.snackbar.Snackbar
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,6 +19,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
 
             val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
 
-            var cliente = Cliente()
+            val cliente = Cliente()
             cliente.setNif(binding.textUsuario.text.toString())
             cliente.setClaveSeguridad(binding.textContraseA.text.toString())
 
@@ -42,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_SHORT).show()
             }else{
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("Cliente", binding.textUsuario.text.toString())
+                intent.putExtra("Cliente", clienteLogeado)
                 startActivity(intent)
             }
 
@@ -99,9 +100,6 @@ class LoginActivity : AppCompatActivity() {
             finishAffinity()
 
         }
-
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

@@ -5,15 +5,67 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Movimientos">
+    tools:context=".activities.Movimientos">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.13"
+        android:id="@+id/mainGLH"/>
 
     <TextView
-        android:id="@+id/textAccs"
+    android:id="@+id/textAccs"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/movimientos"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/mainGLH"
+    style="@style/Estilo.titulo"/>
+
+    <TextView
+        android:id="@+id/selecAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sleccion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainGLH"
+        android:layout_marginStart="10dp"
+        style="@style/Estilo.textoBold"/>
+
+    <Spinner
+        android:id="@+id/spinnerAcc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/selecAcc"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        style="@style/Estilo.Spinner"/>
+
+    <TextView
+        android:id="@+id/textMov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ultimosMovimientos"
+        app:layout_constraintTop_toBottomOf="@id/spinnerAcc"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        style="@style/Estilo.textoBold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvMovimientos"
+        tools:listitem="@layout/item_cuenta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textMov"
+        android:layout_marginTop="16dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

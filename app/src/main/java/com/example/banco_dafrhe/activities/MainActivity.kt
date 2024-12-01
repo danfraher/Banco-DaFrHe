@@ -1,12 +1,16 @@
-package com.example.banco_dafrhe
+package com.example.banco_dafrhe.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.databinding.ActivityMainBinding
+import com.example.banco_dafrhe.pojo.Cliente
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,11 +23,19 @@ class MainActivity : AppCompatActivity() {
 
         //Recibe el usuario de la pantalla de login
 
-        val usuarioRecibido = intent.getSerializableExtra("Cliente")
+        val usuarioRecibido = intent.getSerializableExtra("Cliente") as? Cliente
+
+        if (usuarioRecibido == null || usuarioRecibido.getId() == 0){
+
+            Toast.makeText(this, "Error al recibir el cliente", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+
+        }
 
         //Muestra el usuario en la pantalla principal
 
-        binding.textoBienvenida.text = "${getString(R.string.Bienvenida)} \n \n $usuarioRecibido"
+        binding.textoBienvenida.text = "${getString(R.string.Bienvenida)} \n \n ${usuarioRecibido.getNif().toString()}"
 
         //Botones de la pantalla principal
 
@@ -32,8 +44,7 @@ class MainActivity : AppCompatActivity() {
         binding.btTransfer.setOnClickListener {
 
             val int = Intent(this, TransferActivity::class.java)
-            int.putExtra("Cliente", usuarioRecibido.toString())
-            startActivity(int)
+            int.putExtra("Cliente", usuarioRecibido)
             startActivity(int)
 
         }
@@ -43,9 +54,8 @@ class MainActivity : AppCompatActivity() {
         binding.btCambiarPss.setOnClickListener {
 
             val int = Intent(this, PasswordChange::class.java)
-            int.putExtra("Cliente", usuarioRecibido.toString())
+            int.putExtra("Cliente", usuarioRecibido)
             startActivity(int)
-            finish()
 
         }
 
@@ -53,27 +63,24 @@ class MainActivity : AppCompatActivity() {
 
         binding.btExit.setOnClickListener {
 
-            val int = Intent(this, LoginActivity::class.java)
-            startActivity(int)
             finish()
 
         }
 
         binding.btGlobal.setOnClickListener {
 
-            val int = Intent(this, PosicionGlobal::class.java)
-            int.putExtra("Cliente", usuarioRecibido.toString())
+            Log.d("MainActivity", "Enviando cliente: $usuarioRecibido")
+            val int = Intent(this, GlobalPositionActivity::class.java)
+            int.putExtra("Cliente", usuarioRecibido)
             startActivity(int)
-            finish()
 
         }
 
         binding.btMovimientos.setOnClickListener {
 
             val int = Intent(this, Movimientos::class.java)
-            int.putExtra("Cliente", usuarioRecibido.toString())
+            int.putExtra("Cliente", usuarioRecibido)
             startActivity(int)
-            finish()
 
         }
 
