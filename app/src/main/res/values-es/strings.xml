@@ -49,4 +49,5 @@
         <item>£</item>
         <item>¥</item>
     </string-array>
+    <string name="ultimosMovimientos">"Ultimos movimientos: "</string>
 </resources>
