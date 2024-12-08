@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:orientation="horizontal">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/fragmentContainerAcc"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         tools:layout="@layout/fragment_accounts" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentDetails"
+        android:id="@+id/fragmentContainerMovimientos"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
         tools:layout="@layout/fragment_accounts_movement" />
+
 
 </LinearLayout>

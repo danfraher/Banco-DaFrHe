@@ -50,4 +50,8 @@
         <item>¥</item>
     </string-array>
     <string name="ultimosMovimientos">"Ultimos movimientos: "</string>
+    <string name="id">"Id: "</string>
+    <string name="tipo">"Tipo: "</string>
+    <string name="Fecha">Fecha de la operacion:</string>
+    <string name="importe">"Importe: "</string>
 </resources>

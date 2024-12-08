@@ -55,8 +55,6 @@ class Movimientos : AppCompatActivity() {
         cuentasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         binding.spinnerAcc.adapter = cuentasAdapter
-
-        movimientoAdapter = MovimientoAdapter(emptyList())
         binding.rvMovimientos.layoutManager = LinearLayoutManager(this)
         binding.rvMovimientos.adapter = movimientoAdapter
 
@@ -66,7 +64,7 @@ class Movimientos : AppCompatActivity() {
                 val cuentaSeleccionada = listaCuentas[position]
                 val listaMovimientos = mbo?.getMovimientos(cuentaSeleccionada) as? List<Movimiento> ?: emptyList()
 
-                movimientoAdapter.updateData(listaMovimientos)
+                //movimientoAdapter.updateData(listaMovimientos)
 
             }
 

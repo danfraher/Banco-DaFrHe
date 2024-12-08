@@ -2,24 +2,21 @@ package com.example.banco_dafrhe.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.banco_dafrhe.Adapter.AccountsListener
-import com.example.banco_dafrhe.Adapter.CuentaAdapter
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.example.banco_dafrhe.R
-import com.example.banco_dafrhe.bd.MiBancoOperacional
-import com.example.banco_dafrhe.databinding.ActivityGlobalPositionDetailBinding
 import com.example.banco_dafrhe.databinding.ActivityPosicionGlobalBinding
+import com.example.banco_dafrhe.fragments.AccountListener
 import com.example.banco_dafrhe.fragments.AccountsFragment
+import com.example.banco_dafrhe.fragments.AccountsMovementFragment
 import com.example.banco_dafrhe.pojo.Cliente
 import com.example.banco_dafrhe.pojo.Cuenta
 
-class GlobalPositionActivity : AppCompatActivity(){
+class GlobalPositionActivity : AppCompatActivity(), AccountListener{
 
    private lateinit var binding: ActivityPosicionGlobalBinding
 
@@ -29,25 +26,56 @@ class GlobalPositionActivity : AppCompatActivity(){
         binding = ActivityPosicionGlobalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d("GlobalPositionActivity", "Intent recibido: $intent")
-        val cliente = intent.getSerializableExtra("Cliente") as? Cliente
-        Log.d("GlobalPositionActivity", "Cliente recibido: $cliente")
-
-        if (cliente == null) {
-            Log.e("GlobalPositionActivity", "Cliente es nulo o no fue pasado correctamente")
-            finish() // Finaliza la actividad si el cliente no es válido
-            return
+        val cliente: Cliente? = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("Cliente", Cliente::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("Cliente") as? Cliente
         }
 
-        val accountsFragment = AccountsFragment.newInstance(cliente)
+
+        val frgCuenta: AccountsFragment = AccountsFragment.newInstance(cliente)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerAcc, frgCuenta)
+            .commit()
+
+        frgCuenta.setCuentasListener(this)
 
 
-            supportFragmentManager.beginTransaction()
-                .replace(binding.fragmentContainer.id, accountsFragment)
-                .commit()
+        val mainView = findViewById<View>(R.id.main)
+        if (mainView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
 
+            }
+        } else {
+            Log.e("GlobalPositionActivity", "mainView no se ha inicializado correctamente.")
+        }
 
 
     }
+
+    override fun onCuentaSeleccionada(cuenta: Cuenta) {
+
+        var existeMovimiento = findViewById<View>(R.id.fragmentContainerMovimientos) != null
+        if (existeMovimiento) {
+
+            val movementFragment: AccountsMovementFragment = AccountsMovementFragment.newInstance(cuenta)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerMovimientos, movementFragment)
+                .commit()
+
+        } else {
+
+            val int = Intent(this, GlobalPositionDetailActivity::class.java)
+            int.putExtra("Cuenta", cuenta)
+            startActivity(int)
+
+        }
+    }
+
 
 }

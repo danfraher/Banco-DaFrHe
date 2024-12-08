@@ -11,7 +11,7 @@ import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.databinding.ItemCuentaBinding
 import com.example.banco_dafrhe.pojo.Cuenta
 
-class CuentaAdapter (private val listaCuentas: List<Cuenta>, private val listener: AccountsListener) : RecyclerView.Adapter<CuentaAdapter.CuentaViewHolder>() {
+class CuentaAdapter (private val listaCuentas: ArrayList<Cuenta>?, private val listener: OnClickListener) : RecyclerView.Adapter<CuentaAdapter.CuentaViewHolder>() {
 
     private lateinit var context: Context
 
@@ -21,36 +21,36 @@ class CuentaAdapter (private val listaCuentas: List<Cuenta>, private val listene
 
         fun setListener(cuenta: Cuenta) {
 
-            binding.root.setOnClickListener {
+            binding.root.setOnClickListener{listener.onClick(cuenta)}
 
-                listener.onClick(cuenta)
-
-            }
-
-        }
-
-        fun onAccountClicked(cuenta: Cuenta) {
-            listener?.onAccountSelected(cuenta)
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CuentaViewHolder {
+
         context = parent.context
         val view = LayoutInflater.from(context).inflate(R.layout.item_cuenta, parent, false)
         return CuentaViewHolder(view)
+
     }
 
-    override fun getItemCount(): Int = listaCuentas.size
+    override fun getItemCount(): Int = listaCuentas?.size!!
 
     override fun onBindViewHolder(holder: CuentaViewHolder, position: Int) {
-        val cuenta = listaCuentas.get(position)
+        val cuenta = listaCuentas?.get(position)
 
         with(holder) {
-
+            if (cuenta != null) {
+                setListener(cuenta)
+            }
             binding.tvOrder.text = (position + 1).toString()
-            binding.tvName.text = cuenta.getNumeroCuenta()
-            binding.tvDinero.text = cuenta.getSaldoActual().toString()
+            if (cuenta != null) {
+                binding.tvName.text = cuenta.getNumeroCuenta()
+            }
+            if (cuenta != null) {
+                binding.tvDinero.text = cuenta.getSaldoActual().toString()
+            }
             Glide.with(context)
                 .load(R.drawable.banco)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
