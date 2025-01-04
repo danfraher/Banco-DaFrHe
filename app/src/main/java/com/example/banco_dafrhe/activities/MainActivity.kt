@@ -3,16 +3,20 @@ package com.example.banco_dafrhe.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.banco_dafrhe.R
 import com.example.banco_dafrhe.databinding.ActivityMainBinding
 import com.example.banco_dafrhe.pojo.Cliente
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -84,14 +88,38 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        val drawerLayout = binding.drawerLayout
+        val navView = binding.navView
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, binding.bottomAppBar, R.string.open_drawer, R.string.close_drawer
+        )
+        drawerLayout?.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navView?.setNavigationItemSelectedListener(this)
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawer_layout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_global -> binding.btGlobal.performClick()
+            R.id.nav_movements -> binding.btMovimientos.performClick()
+            R.id.nav_transfer -> binding.btTransfer.performClick()
+            R.id.nav_settings -> {
+                Toast.makeText(this, "Configuración seleccionada", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.drawerLayout?.closeDrawer(GravityCompat.START)
+        return true
     }
 
 }

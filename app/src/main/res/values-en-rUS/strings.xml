@@ -54,4 +54,7 @@
     <string name="tipo">"Tipo: "</string>
     <string name="Fecha">Fecha de la operacion:</string>
     <string name="importe">"Importe: "</string>
+    <string name="settings">settings</string>
+    <string name="open_drawer">Open Menu</string>
+    <string name="close_drawer">Close Menu</string>
 </resources>

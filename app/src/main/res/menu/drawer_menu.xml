@@ -1,0 +1,43 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Opción: Posición Global -->
+    <item
+        android:id="@+id/nav_global"
+        android:icon="@drawable/psi"
+        android:title="@string/posicionGlobal" />
+
+    <!-- Opción: Movimientos -->
+    <item
+        android:id="@+id/nav_movements"
+        android:icon="@drawable/mvi"
+        android:title="@string/movimientos" />
+
+    <!-- Opción: Transferencias -->
+    <item
+        android:id="@+id/nav_transfer"
+        android:icon="@drawable/tri"
+        android:title="@string/transferencias" />
+
+    <!-- Opción: Cambiar Password -->
+    <item
+        android:id="@+id/nav_cambiarPss"
+        android:icon="@drawable/caconi"
+        android:title="@string/cambiarContra" />
+
+    <!-- Opción: Promociones -->
+    <item
+        android:id="@+id/nav_promociones"
+        android:icon="@drawable/promoi"
+        android:title="@string/promociones" />
+
+    <!-- Opción: Cajeros -->
+    <item
+        android:id="@+id/nav_cajero"
+        android:icon="@drawable/caji"
+        android:title="@string/cajeros" />
+
+    <!-- Opción: Configuración -->
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/settings" />
+</menu>
