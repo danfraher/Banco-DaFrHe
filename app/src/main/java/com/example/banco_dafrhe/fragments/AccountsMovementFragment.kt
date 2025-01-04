@@ -28,15 +28,17 @@ class AccountsMovementFragment : Fragment(), OnClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var itemDecoration: DividerItemDecoration
     private lateinit var cuenta: Cuenta
+    private var tipoMovimiento: Int = -1
 
     companion object{
 
         @JvmStatic
-        fun newInstance(cuenta: Cuenta?) = AccountsMovementFragment().apply {
+        fun newInstance(cuenta: Cuenta?, tipo: Int) = AccountsMovementFragment().apply {
 
             arguments = Bundle().apply {
 
                 putSerializable("Cuenta", cuenta)
+                putInt("Tipo", tipo)
 
             }
 
@@ -61,6 +63,8 @@ class AccountsMovementFragment : Fragment(), OnClickListener {
                 cuenta = tempCuenta
             }
 
+            tipoMovimiento = it.getInt("Tipo", -1)
+
         }
 
     }
@@ -69,30 +73,25 @@ class AccountsMovementFragment : Fragment(), OnClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentAccountsMovementBinding.inflate(inflater, container, false)
         linearLayoutManager = LinearLayoutManager(context)
         itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 
-        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
+        val mbo = MiBancoOperacional.getInstance(context)
 
-        @Suppress("DEPRECATION")
-        var cuenta = arguments?.getSerializable("Cuenta")
+        val movimientos = if (tipoMovimiento == -1) {
+            mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
+        } else {
+            mbo?.getMovimientosTipo(cuenta, tipoMovimiento) as ArrayList<Movimiento>
+        }
 
-        if (cuenta != null){
-
-            cuenta = cuenta as Cuenta
-
-            movimientoAdapter = MovimientoAdapter(mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>, this)
-            binding.recyclerAccMovement.apply {
-
-                layoutManager = linearLayoutManager
-                adapter = movimientoAdapter
-                addItemDecoration(itemDecoration)
-
-            }
-
+        movimientoAdapter = MovimientoAdapter(movimientos, this)
+        binding.recyclerAccMovement.apply {
+            layoutManager = linearLayoutManager
+            adapter = movimientoAdapter
+            addItemDecoration(itemDecoration)
         }
 
         return binding.root

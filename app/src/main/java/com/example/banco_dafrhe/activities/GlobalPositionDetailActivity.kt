@@ -27,11 +27,19 @@ class GlobalPositionDetailActivity : AppCompatActivity() {
             intent.getSerializableExtra("Cuenta") as? Cuenta
         }
 
-        val movementsFragment = AccountsMovementFragment.newInstance(cuenta)
-        supportFragmentManager.beginTransaction()
-            .replace(binding.fragmentContainerMovimientos.id, movementsFragment)
-            .commit()
+        mostrarMovimientos(-1, cuenta)
 
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            val tipoMovimiento = when (menuItem.itemId) {
+                R.id.nav_todos -> -1
+                R.id.nav_tipo_0 -> 0
+                R.id.nav_tipo_1 -> 1
+                R.id.nav_tipo_2 -> 2
+                else -> -1
+            }
+            mostrarMovimientos(tipoMovimiento, cuenta)
+            true
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -39,6 +47,13 @@ class GlobalPositionDetailActivity : AppCompatActivity() {
             insets
         }
 
+    }
+
+    private fun mostrarMovimientos(tipo: Int, cuenta: Cuenta?) {
+        val movementsFragment = AccountsMovementFragment.newInstance(cuenta, tipo)
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentContainerMovimientos.id, movementsFragment)
+            .commit()
     }
 
 }

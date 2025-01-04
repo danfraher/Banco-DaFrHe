@@ -63,7 +63,7 @@ class GlobalPositionActivity : AppCompatActivity(), AccountListener{
         var existeMovimiento = findViewById<View>(R.id.fragmentContainerMovimientos) != null
         if (existeMovimiento) {
 
-            val movementFragment: AccountsMovementFragment = AccountsMovementFragment.newInstance(cuenta)
+            val movementFragment: AccountsMovementFragment = AccountsMovementFragment.newInstance(cuenta, -1)
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerMovimientos, movementFragment)
                 .commit()
