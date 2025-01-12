@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Categoría general -->
+    <PreferenceCategory
+        app:title="General"
+        app:icon="@android:drawable/ic_menu_preferences">
+
+        <!-- Idioma -->
+        <ListPreference
+            app:key="language"
+            app:title="Idioma de la aplicación"
+            app:summary="Selecciona el idioma"
+            app:entries="@array/language_options"
+            app:entryValues="@array/language_values"
+            app:defaultValue="es" />
+
+        <!-- Origen de datos -->
+        <ListPreference
+            app:key="data_source"
+            app:title="Origen de datos"
+            app:summary="Selecciona el origen de los datos"
+            app:entries="@array/data_source_options"
+            app:entryValues="@array/data_source_values"
+            app:defaultValue="local_db" />
+    </PreferenceCategory>
+
+    <!-- Categoría multimedia -->
+    <PreferenceCategory
+        app:title="Multimedia"
+        app:icon="@android:drawable/ic_menu_gallery">
+
+        <!-- Música -->
+        <SwitchPreferenceCompat
+            app:key="play_music"
+            app:title="Reproducir música"
+            app:summary="Activa o desactiva la música de la app"
+            app:defaultValue="true" />
+
+        <!-- Vídeo de bienvenida -->
+        <SwitchPreferenceCompat
+            app:key="play_welcome_video"
+            app:title="Reproducir vídeo de bienvenida"
+            app:summary="Activa o desactiva el vídeo de bienvenida"
+            app:defaultValue="true" />
+    </PreferenceCategory>
+
+    <!-- Categoría de notificaciones -->
+    <PreferenceCategory
+        app:title="Notificaciones"
+        app:icon="@android:drawable/ic_menu_manage">
+
+        <!-- Volumen de notificaciones -->
+        <SeekBarPreference
+            app:key="notification_volume"
+            app:title="Volumen de notificaciones"
+            app:summary="Ajusta el volumen de las notificaciones"
+            app:showSeekBarValue="true"
+            app:defaultValue="50"
+            app:min="0"
+            android:max="100" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

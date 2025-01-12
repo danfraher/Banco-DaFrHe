@@ -1,7 +1,10 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
+
+
 
 android {
     namespace = "com.example.banco_dafrhe"
@@ -46,10 +49,13 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.generativeai)
+    implementation(libs.androidx.preference)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.material)
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.preference:preference:1.2.0")
+
 
 }

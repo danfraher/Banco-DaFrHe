@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -115,11 +116,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_movements -> binding.btMovimientos.performClick()
             R.id.nav_transfer -> binding.btTransfer.performClick()
             R.id.nav_settings -> {
-                Toast.makeText(this, "Configuración seleccionada", Toast.LENGTH_SHORT).show()
+                openSettings(view = View(this))
             }
         }
         binding.drawerLayout?.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun openSettings(view: View) {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
     }
 
 }

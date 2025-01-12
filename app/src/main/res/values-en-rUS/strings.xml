@@ -57,4 +57,20 @@
     <string name="settings">settings</string>
     <string name="open_drawer">Open Menu</string>
     <string name="close_drawer">Close Menu</string>
+    <string-array name="language_options">
+        <item>Spanish</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>es</item>
+        <item>en</item>
+    </string-array>
+    <string-array name="data_source_options">
+        <item>Local Database</item>
+        <item>Web Services</item>
+    </string-array>
+    <string-array name="data_source_values">
+        <item>local_db</item>
+        <item>web_service</item>
+    </string-array>
 </resources>
