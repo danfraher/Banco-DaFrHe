@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 
@@ -56,6 +57,9 @@ dependencies {
     implementation(libs.material)
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.preference:preference:1.2.0")
+    val roomVersion = "2.6.1"
 
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
 }

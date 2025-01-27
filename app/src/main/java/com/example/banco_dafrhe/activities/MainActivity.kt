@@ -89,6 +89,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
 
+        binding.btCajero.setOnClickListener{
+
+            val int = Intent(this, CajerosActivity::class.java)
+            startActivity(int)
+
+        }
+
         val drawerLayout = binding.drawerLayout
         val navView = binding.navView
 
